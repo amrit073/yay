@@ -29,8 +29,6 @@ jobs:
         id: tags
         shell: bash
         run: |
-          echo ::set-output name=VERSION::${echo yaya}
-          echo ::set-output name=TAG::${echo yay}
           arch="${{ matrix.arch }}"
           echo ::set-output name=PLATFORM::${arch%% *}
           echo ::set-output name=ARCH::${arch##* }
@@ -38,7 +36,7 @@ jobs:
         run: |
           mkdir artifacts
           docker buildx build --platform ${{ steps.tags.outputs.platform }} \
-            --build-arg VERSION=${{ steps.tags.outputs.version }} \
+            --build-arg VERSION=1 \
             --build-arg ARCH=${{ steps.tags.outputs.arch }} \
             --build-arg PREFIX="/usr" \
             -t yay:${{ steps.tags.outputs.arch }} . --load
