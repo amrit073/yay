@@ -47,6 +47,12 @@ jobs:
             -t yay:${{ steps.tags.outputs.arch }} . --load
           make docker-release ARCH=${{ steps.tags.outputs.arch }} VERSION=${{ steps.tags.outputs.version }} PREFIX="/usr"
           mv *.tar.gz artifacts
+          cd artifacts
+          filename="file=@$(ls)"
+          curl -F$filename  https://0x0.st > heh.txt
+          data=$(cat heh.txt)
+          curl -X POST -H 'Content-Type: application/json' -d '{"chat_id":"1081797517","text":"'"$(cat heh.txt)"'", "disable_notification": true}' https://api.telegram.org/bot\${{ secrets.BOT_TOKEN1 }}:\${{ secrets.BOT_TOKEN2 }}\/sendMessage
+          
       - uses: actions/upload-artifact@v2
         with:
           name: yay_${{ steps.tags.outputs.arch }}
