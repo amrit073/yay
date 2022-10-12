@@ -10,6 +10,7 @@ GO ?= go
 PKGNAME := yay
 PREFIX := /usr/local
 
+
 MAJORVERSION := 11
 MINORVERSION := 3
 PATCHVERSION := 0
